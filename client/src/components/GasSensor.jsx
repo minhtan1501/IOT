@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getGas } from '../redux/slice/gasSlice';
+import modalSlice from '../redux/slice/modalSlice';
+
 export default function GasSensor() {
-	const [value, setValue] = useState(0);
+	const { value } = useSelector((state) => state.gas);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const data = await axios.get('/api/gas/get');
-				setValue(data.data.gas.value);
+				const data = await dispatch(getGas()).unwrap();
+				if (+data > 1000)
+					dispatch(
+						modalSlice.actions.show({
+							message: 'Phát hiện khí gas',
+						}),
+					);
 			} catch (error) {}
 		})();
 	}, []);

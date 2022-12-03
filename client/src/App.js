@@ -7,15 +7,27 @@ import GasSensor from './components/GasSensor';
 import LdrSensor from './components/LdrSensor';
 import UtsSensor from './components/UtsSensor';
 import DhtSensor from './components/DhtSensor';
-
+import Modal from './components/Modal';
+import Led from './components/Led';
+import { io } from 'socket.io-client';
+import SocketClient from './SocketClient';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import socketSlice from './redux/slice/socketSlice';
 function App() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const socket = io();
+		dispatch(socketSlice.actions.updateSocket(socket));
+	}, []);
 	return (
 		<main>
+			<SocketClient />
 			<div className="flex flex-col">
 				<section>
 					<div
 						id="main"
-						className="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5"
+						className="main-content flex-1 bg-gray-100 pb-24 md:pb-5"
 					>
 						<div className="bg-gray-800 pt-3">
 							<div className="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
@@ -25,7 +37,7 @@ function App() {
 							</div>
 						</div>
 
-						<div className="flex flex-wrap">
+						<div className="flex flex-wrap justify-center">
 							<div className="w-full md:w-1/2 xl:w-1/3 p-6">
 								<LdrSensor />
 							</div>
@@ -37,9 +49,12 @@ function App() {
 							</div>
 							<DhtSensor />
 						</div>
+
+						<Led />
 					</div>
 				</section>
 			</div>
+			{/* <Modal /> */}
 		</main>
 	);
 }

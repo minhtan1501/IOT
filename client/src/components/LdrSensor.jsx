@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLdr } from '../redux/slice/ldrSlice';
 
 export default function LdrSensor() {
-	const [value, setValue] = useState(0);
+	const { value } = useSelector((state) => state.ldr);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		(async () => {
+			try {
+				await dispatch(getLdr());
+			} catch (error) {}
+		})();
+	}, []);
 
 	return (
 		<div className="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
@@ -16,7 +27,7 @@ export default function LdrSensor() {
 						Ldr Sensor
 					</h2>
 					<p className="font-bold text-3xl">
-						$3249{' '}
+						{value}
 						<span className="text-green-500">
 							<i className="fas fa-caret-up"></i>
 						</span>
