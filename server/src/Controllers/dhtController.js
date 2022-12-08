@@ -3,10 +3,10 @@ const dhtModels = require("../Models/dhtModels");
 const dhtController = {
   store: async (req, res) => {
     try {
-      const { temp = null, hum = null } = req.body;
+      const { temperature = null, humidity = null } = req.body;
       const newDht = new dhtModels({
-        temperature: temp,
-        humidity: hum,
+        temperature,
+        humidity
       });
       await newDht.save();
       return res.status(200).json({ dht: newDht });
@@ -15,7 +15,6 @@ const dhtController = {
   getDht: async (req, res) => {
     try {
       const dht = await dhtModels.findOne({}).sort({ createdAt: -1 });
-      console.log(dht);
       if (!dht)
         return res.status(400).json({ message: "Dht chưa có thông tin" });
       return res.status(200).json({ dht: dht });
@@ -23,7 +22,7 @@ const dhtController = {
   },
   getAllDht: async (req, res) => {
     try {
-      const dht = await dhtModels.find({}).sort({ createdAt: 1 });
+      const dht = await dhtModels.find({}).sort({ createdAt: -1 }).limit(10);
       if (!dht)
         return res.status(400).json({ message: "Dht chưa có thông tin" });
 

@@ -14,7 +14,9 @@ const ldrSlice = createSlice({
 		value: null,
 	},
 	reducers: {
-		update(state, action) {},
+		update(state, action) {
+			state.value = action.payload;
+		},
 	},
 	extraReducers: {
 		[getLdr.fulfilled]: (state, action) => {

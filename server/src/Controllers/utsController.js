@@ -1,28 +1,47 @@
 const utsModels = require('../Models/utsModels');
 const utsController = {
-	update: async (req, res) => {
+	toggle: async (req, res) => {
 		try {
 			const uts = await utsModels.findOne({});
-			const { value = 0 } = req.body;
 			if (!uts) {
-				const newUts = new utsModels({ value });
+				const newUts = new utsModels({ state: true });
 				await newUts.save();
 				return res.json({ uts: newUts });
 			}
 			const newUts = await utsModels.findByIdAndUpdate(
 				uts._id,
-				{ value },
+				{ state: !uts.state },
 				{ new: true },
 			);
-			console.log(newUts);
 			return res.json({ uts: newUts });
 		} catch (error) {}
 	},
 	get: async (req, res) => {
 		try {
 			const uts = await utsModels.findOne({});
-			if (!uts) return res.json({ message: 'uts chưa có thông tin' });
+			if (!uts)
+				return res.json({
+					message: 'Cảm biến siêu âm chưa có thông tin',
+				});
 			return res.json({ uts });
+		} catch (error) {}
+	},
+	update: async (req, res) => {
+		try {
+			const uts = await utsModels.findOne({});
+			const { state } = req.body;
+			if (!uts) {
+				const newUts = new utsModels({ state });
+				await newUts.save();
+				return res.json({ uts: newUts });
+			} else {
+				const newUts = await utsModels.findByIdAndUpdate(
+					uts._id,
+					{ state },
+					{ new: true },
+				);
+				return res.json({ uts: newUts });
+			}
 		} catch (error) {}
 	},
 };

@@ -22,7 +22,11 @@ const ledSlice = createSlice({
 	initialState: {
 		value: null,
 	},
-	reducers: {},
+	reducers: {
+		update(state, action) {
+			state.value = action.payload;
+		},
+	},
 	extraReducers: {
 		[getLed.fulfilled]: (state, action) => {
 			state.value = action.payload;

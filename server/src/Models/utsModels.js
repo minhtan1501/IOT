@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const utsSchema = new mongoose.Schema(
 	{
-		value: { type: Number, default: 0 },
+	  state: {type: Boolean, default: false},
 	},
 	{
-		timestamps: true,
-	},
-);
+	  timestamps: true,
+	}
+  );
 
 module.exports = mongoose.model('uts', utsSchema);

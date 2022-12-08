@@ -3,7 +3,6 @@ const ledController = {
 	toggle: async (req, res) => {
 		try {
 			const led = await ledModels.findOne({});
-			console.log(led);
 			if (!led) {
 				const newLed = new ledModels({ state: false });
 				await newLed.save();
@@ -14,7 +13,6 @@ const ledController = {
 				{ state: !led.state },
 				{ new: true },
 			);
-			console.log(newLed);
 			return res.json({ led: newLed });
 		} catch (error) {}
 	},

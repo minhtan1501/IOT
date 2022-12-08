@@ -21,15 +21,15 @@ export default function DhtSensor() {
 				<div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
 					<div className="flex flex-row items-center">
 						<div className="flex-shrink pr-4">
-							<div className="rounded-full p-5 bg-blue-600">
-								<i className="fas fa-server fa-2x fa-inverse"></i>
+							<div className="rounded-full p-5 ">
+								<img src="temperature.png" alt=''  className='w-[30px] h-[30px]'/>
 							</div>
 						</div>
 						<div className="flex-1 text-right md:text-center">
 							<h2 className="font-bold uppercase text-gray-600">
-								Temperature
+								Nhiệt độ
 							</h2>
-							<p className="font-bold text-3xl">
+							<p className="font-bold text-2xl">
 								{temp ? temp + '°C' : 'Không có dữ liệu'}
 							</p>
 						</div>
@@ -42,15 +42,16 @@ export default function DhtSensor() {
 				<div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
 					<div className="flex flex-row items-center">
 						<div className="flex-shrink pr-4">
-							<div className="rounded-full p-5 bg-indigo-600">
-								<i className="fas fa-tasks fa-2x fa-inverse"></i>
+							<div className="rounded-full p-5">
+							<img src="humidity.png" alt=''  className='w-[30px] h-[30px]'/>
+
 							</div>
 						</div>
 						<div className="flex-1 text-right md:text-center">
 							<h2 className="font-bold uppercase text-gray-600">
-								Humidity
+								Độ ẩm
 							</h2>
-							<p className="font-bold text-3xl">
+							<p className="font-bold text-2xl">
 								{humi ? humi + '%' : 'Không có dữ liệu'}
 							</p>
 						</div>

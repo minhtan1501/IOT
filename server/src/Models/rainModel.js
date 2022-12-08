@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ledSchema = new mongoose.Schema(
+const rainSchema = new mongoose.Schema(
 	{
 		state: { type: Boolean, default: false },
 	},
@@ -9,4 +9,4 @@ const ledSchema = new mongoose.Schema(
 	},
 );
 
-module.exports = mongoose.model('led', ledSchema);
+module.exports = mongoose.model('rain', rainSchema);

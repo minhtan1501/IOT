@@ -1,4 +1,3 @@
-import './App.css';
 import './components/LdrSensor';
 import './components/GasSensor';
 import './components/DhtSensor';
@@ -14,12 +13,16 @@ import SocketClient from './SocketClient';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import socketSlice from './redux/slice/socketSlice';
+import RainSensor from './components/RainSensor';
+import Motor from './components/Motor';
+import ChartDht from './components/ChartDht';
 function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const socket = io();
 		dispatch(socketSlice.actions.updateSocket(socket));
 	}, []);
+
 	return (
 		<main>
 			<SocketClient />
@@ -48,9 +51,21 @@ function App() {
 								<UtsSensor />
 							</div>
 							<DhtSensor />
+							<div className="w-full md:w-1/2 xl:w-1/3 p-6">
+								<RainSensor />
+							</div>
 						</div>
-
-						<Led />
+						<div className="flex flex-wrap">
+							<div className="w-full md:w-1/2">
+								<Led />
+							</div>
+							<div className="w-full md:w-1/2">
+								<Motor />
+							</div>
+						</div>
+					</div>
+					<div className="">
+						<ChartDht />
 					</div>
 				</section>
 			</div>
