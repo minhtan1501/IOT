@@ -24,11 +24,11 @@ export default function Led() {
 		} catch (error) {}
 	};
 
-	useEffect(() => {
-		if (!value && utsValue && ldrValue < 100) {
-			dispatch(toggleLed());
-		}
-	}, [utsValue, ldrValue]);
+	// useEffect(() => {
+	// 	if (!value && utsValue && ldrValue < 100) {
+	// 		dispatch(toggleLed());
+	// 	}
+	// }, [utsValue, ldrValue]);
 
 	return (
 		<div className="hover:cursor-pointer flex items-center justify-center py-3">
